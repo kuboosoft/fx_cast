@@ -28,24 +28,26 @@ interface BridgeDownloadsProps {
 
 const BridgeDownloads = (props: BridgeDownloadsProps) => (
     <div className="bridge-downloads">
-        <button className="bridge-downloads__download
+        <button className="button
+                           bridge-downloads__download
                            bridge-downloads__win"
                 disabled
                 onClick={ () => downloadApp(props.info, "win") }>
             Windows
         </button>
-        <button className="bridge-downloads__download
+        <button className="button
+                           bridge-downloads__download
                            bridge-downloads__mac"
                 onClick={ () => downloadApp(props.info, "mac") }>
             macOS
         </button>
 
         <div className="bridge-downloads__linux">
-            <button className="bridge-downloads__download"
+            <button className="button bridge-downloads__download"
                     onClick={ () => downloadApp(props.info, "deb") }>
                 Linux (deb)
             </button>
-            <button className="bridge-downloads__download"
+            <button className="button bridge-downloads__download"
                     onClick={ () => downloadApp(props.info, "rpm") }>
                 Linux (rpm)
             </button>
@@ -140,7 +142,7 @@ export default class Bridge extends Component<BridgeProps, BridgeState> {
 
     public render () {
         return (
-            <div className="bridge">
+            <div className="card bridge">
                 { this.props.loading
                     ? ( <div className="bridge__loading">
                             { _("optionsBridgeLoading") }
@@ -170,7 +172,7 @@ export default class Bridge extends Component<BridgeProps, BridgeState> {
                                                     { _("optionsBridgeUpdatePackageTypeRpm") }
                                                 </option>
                                             </select> }
-                                        <button className="bridge__update-start"
+                                        <button className="button bridge__update-start"
                                                 onClick={ this.onUpdate }
                                                 disabled={ this.props.platform === "linux"
                                                         && !this.state.packageType }>
@@ -178,7 +180,7 @@ export default class Bridge extends Component<BridgeProps, BridgeState> {
                                         </button>
                                     </div>
                                 </div> )
-                            : ( <button className="bridge__update-check"
+                            : ( <button className="button bridge__update-check"
                                         disabled={ this.state.isCheckingUpdates }
                                         onClick={ this.onCheckUpdates }>
 

@@ -49,7 +49,7 @@ export default class EditableListItem extends Component<
                 <div className="editable-list__title"
                      onDoubleClick={ this.handleEditBegin }>
                     { this.state.editing
-                        ? <input className="editable-list__edit-field"
+                        ? <input className="field editable-list__edit-field"
                                  type="text"
                                  ref={ input => this.input = input }
                                  value={ this.state.editValue }
@@ -59,11 +59,13 @@ export default class EditableListItem extends Component<
                         : this.props.text }
                 </div>
                 <button onClick={ this.handleEditBegin }
-                        type="button">
+                        type="button"
+                        className="button">
                     { _("optionsUserAgentWhitelistEditItem") }
                 </button>
                 <button onClick={ this.handleRemove }
-                        type="button">
+                        type="button"
+                        className="button">
                     { _("optionsUserAgentWhitelistRemoveItem") }
                 </button>
             </li>

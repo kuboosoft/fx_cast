@@ -49,12 +49,12 @@ export default class EditableList extends Component<
             <div className="editable-list">
                 <div className="editable-list__view-actions">
                     { this.state.rawView &&
-                        <button className="editable-list__save-raw-button"
+                        <button className="button editable-list__save-raw-button"
                                 onClick={ this.handleSaveRaw }
                                 type="button">
                             { _("optionsUserAgentWhitelistSaveRaw") }
                         </button> }
-                    <button className="editable-list__view-button"
+                    <button className="button editable-list__view-button"
                             onClick={ this.handleSwitchView }
                             type="button">
                         { this.state.rawView
@@ -89,7 +89,7 @@ export default class EditableList extends Component<
                                                   editing={ true } /> }
 
                             <div className="editable-list__item editable-list__item-actions">
-                                <button className="editable-list__add-button"
+                                <button className="button editable-list__add-button"
                                         onClick={ this.handleAddItem }
                                         type="button">
                                     { _("optionsUserAgentWhitelistAddItem") }
