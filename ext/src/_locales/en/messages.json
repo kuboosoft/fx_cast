@@ -274,6 +274,31 @@
         }
     }
 
+  , "optionsReceiverSelectorCategoryName": {
+        "message": "Receiver Selector"
+    }
+  , "optionsReceiverSelectorTypeCategoryName": {
+        "message": "UI Type"
+    }
+  , "optionsReceiverSelectorTypePopup": {
+        "message": "Popup"
+    }
+  , "optionsReceiverSelectorTypePopupDescription": {
+        "message": "The default HTML UI. Opens in a browser window popup."
+    }
+  , "optionsReceiverSelectorTypePopupUsePhotonTheme": {
+        "message": "Use Firefox style"
+    }
+  , "optionsReceiverSelectorTypePopupUsePhotonThemeDescription": {
+        "message": "Use Firefox's Photon UI style."
+    }
+  , "optionsReceiverSelectorTypeNative": {
+        "message": "Native"
+    }
+  , "optionsReceiverSelectorTypeNativeDescription": {
+        "message": "Currently macOS only, provided with the bridge app. Uses platform-native UI components for better integration."
+    }
+
   , "optionsMirroringCategoryName": {
         "message": "Screen mirroring"
       , "description": "Options page mirroring category name."

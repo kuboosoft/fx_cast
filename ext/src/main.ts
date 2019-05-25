@@ -638,9 +638,9 @@ async function onConnectShim (port: browser.runtime.Port) {
 
     const { os } = await browser.runtime.getPlatformInfo();
 
-    const receiverSelectorManager = getReceiverSelectorManager(os === "mac"
-        ? ReceiverSelectorManagerType.NativeMac
-        : ReceiverSelectorManagerType.Popup);
+    const receiverSelectorType = await options.get("receiverSelector");
+    const receiverSelectorManager =
+            getReceiverSelectorManager(receiverSelectorType);
 
     function onReceiverSelectorManagerSelected (
             ev: ReceiverSelectorSelectedEvent) {

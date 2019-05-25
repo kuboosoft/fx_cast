@@ -6,6 +6,8 @@ import ReactDOM from "react-dom";
 
 import defaultOptions, { Options } from "../../defaultOptions";
 
+import { ReceiverSelectorManagerType } from "../../receiverSelectorManager";
+
 import Bridge from "./Bridge";
 import EditableList from "./EditableList";
 
@@ -30,10 +32,12 @@ browser.runtime.getPlatformInfo()
 
 function getInputValue (input: HTMLInputElement) {
     switch (input.type) {
-        case "checkbox":
+        case "checkbox": {
             return input.checked;
-        case "number":
+        }
+        case "number": {
             return parseFloat(input.value);
+        }
 
         default:
             return input.value;
@@ -153,7 +157,7 @@ class OptionsApp extends Component<{}, OptionsAppState> {
                         <fieldset className="category"
                                   disabled={ !this.state.options.mediaEnabled }>
                             <div className="category__title">
-                                <h2>{ _("optionsLocalMediaCategoryName") }</h2>
+                                <h3>{ _("optionsLocalMediaCategoryName") }</h3>
                             </div>
 
                             <div className="option">
@@ -216,6 +220,61 @@ class OptionsApp extends Component<{}, OptionsAppState> {
                                        onChange={ this.handleInputChange } />
                             </label>
                         </div>
+                    </fieldset>
+
+                    <fieldset className="category">
+                        <div className="category__title">
+                            <h2>{ _("optionsReceiverSelectorCategoryName") }</h2>
+                        </div>
+
+                        <fieldset className="category">
+                            <div className="category__title">
+                                <h3>{ _("optionsReceiverSelectorTypeCategoryName") }</h3>
+                            </div>
+
+                            <div className="radio-cards">
+                                <label className="option card radio-card"
+                                       htmlFor="receiverSelector1">
+                                    <label className="option__control radio">
+                                        <input name="receiverSelector"
+                                               type="radio"
+                                               id="receiverSelector1"
+                                               value={ ReceiverSelectorManagerType.Popup }
+                                               checked={ this.state.options.receiverSelector === ReceiverSelectorManagerType.Popup }
+                                               onChange={ this.handleInputChange } />
+                                        { _("optionsReceiverSelectorTypePopup") }
+                                    </label>
+                                    <div className="option__description indent">
+                                        { _("optionsReceiverSelectorTypePopupDescription") }
+                                    </div>
+
+                                    <div className="option indent">
+                                        <label className="option__control checkbox">
+                                            <input type="checkbox" checked />
+                                            { _("optionsReceiverSelectorTypePopupUsePhotonTheme") }
+                                        </label>
+                                        <div className="option__description indent">
+                                            { _("optionsReceiverSelectorTypePopupUsePhotonThemeDescription") }
+                                        </div>
+                                    </div>
+                                </label>
+                                <label className="option card radio-card radio-card--selected">
+                                    <label className="option__control radio"
+                                           htmlFor="receiverSelector2">
+                                        <input name="receiverSelector"
+                                               type="radio"
+                                               id="receiverSelector2"
+                                               value={ ReceiverSelectorManagerType.NativeMac }
+                                               checked={ this.state.options.receiverSelector === ReceiverSelectorManagerType.NativeMac }
+                                               onChange={ this.handleInputChange } />
+                                        { _("optionsReceiverSelectorTypeNative") }
+                                    </label>
+                                    <div className="option__description indent">
+                                        { _("optionsReceiverSelectorTypeNativeDescription") }
+                                    </div>
+                                </label>
+                            </div>
+                        </fieldset>
                     </fieldset>
 
                     <fieldset className="category">
@@ -319,6 +378,8 @@ class OptionsApp extends Component<{}, OptionsAppState> {
 
     private handleInputChange (ev: React.ChangeEvent<HTMLInputElement>) {
         const { target } = ev;
+
+        console.log(ev, getInputValue(target));
 
         this.setState(currentState => {
             currentState.options[target.name] = getInputValue(target);

@@ -4,6 +4,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+import options from "../../lib/options";
+
 import { getNextEllipsis } from "../../lib/utils";
 import { Message, Receiver } from "../../types";
 
@@ -13,14 +15,27 @@ import { ReceiverSelectorMediaType }
 
 const _ = browser.i18n.getMessage;
 
-// macOS styles
-browser.runtime.getPlatformInfo()
-    .then(platformInfo => {
-        if (platformInfo.os === "mac") {
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = "styles/mac.css";
-            document.head.appendChild(link);
+function insertStyle (url: string) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    document.head.appendChild(link);
+}
+
+options.get("receiverSelectorPopupUsesPhotonTheme")
+    .then(usesPhotonTheme => {
+        if (usesPhotonTheme) {
+            insertStyle("../../vendor/photon/photon.css");
+        } else {
+            insertStyle("styles/platform.css");
+
+            // macOS styles
+            browser.runtime.getPlatformInfo()
+                .then(platformInfo => {
+                    if (platformInfo.os === "mac") {
+                        insertStyle("styles/platformMac.css");
+                    }
+                });
         }
     });
 
@@ -100,7 +115,7 @@ class PopupApp extends Component<{}, PopupAppState> {
                     { _("popupMediaSelectCastLabel") }
                     <select value={ this.state.mediaType }
                             onChange={ this.onSelectChange }
-                            className="media-select-dropdown">
+                            className="select media-select-dropdown">
                         <option value={ ReceiverSelectorMediaType.App }
                                 disabled={ shareMedia }>
                             { _("popupMediaTypeApp") }
@@ -183,7 +198,7 @@ class ReceiverEntry extends Component<ReceiverEntryProps, ReceiverEntryState> {
                     { `${this.props.receiver.host}:${this.props.receiver.port}` }
                 </div>
                 <div className="receiver-status"></div>
-                <button className="receiver-connect"
+                <button className="button receiver-connect"
                         onClick={ this.handleCast }
                         disabled={this.props.isLoading}>
                     { this.state.isLoading
