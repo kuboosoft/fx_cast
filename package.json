@@ -25,8 +25,8 @@
         "makensis": "~0.17.0",
         "pkg": "~4.4.0",
         "node-fetch": "~2.6.0",
-        "@types/mime-types", 
-        "@types/dnssd",
+        "@types/mime-types": "~2.1.24", 
+        "@types/dnssd": "~0.4.1",
         "castv2": "^0.1.9",
         "jasmine@": "^3.4.0"
         "@types/minimist": "^1.2.0",
